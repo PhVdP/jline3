@@ -46,6 +46,10 @@ public final class TerminalBuilder {
     public static final String PROP_JANSI = "org.jline.terminal.jansi";
     public static final String PROP_EXEC = "org.jline.terminal.exec";
     public static final String PROP_DUMB = "org.jline.terminal.dumb";
+    
+    // PV add a new properties 
+    public static final String PROP_READER_NON_BLOCKING = "org.jline.terminal.isReaderNonBlocking";
+    
 
     /**
      * Returns the default system terminal.
@@ -124,6 +128,14 @@ public final class TerminalBuilder {
     public TerminalBuilder type(String type) {
         this.type = type;
         return this;
+    }
+    
+    // PV Non blocking reader can be set with the builder.
+    public TerminalBuilder NonBlockingRead (boolean nb) {
+    	  if (!nb) { // if false
+    	    System.setProperty (PROP_READER_NON_BLOCKING, "false");
+    	  }
+    	  return this;
     }
 
     /**
@@ -266,6 +278,7 @@ public final class TerminalBuilder {
         if (dumb == null) {
             dumb = getBoolean(PROP_DUMB, null);
         }
+        
         if ((system != null && system) || (system == null && in == null && out == null)) {
             if (attributes != null || size != null) {
                 Log.warn("Attributes and size fields are ignored when creating a system terminal");
