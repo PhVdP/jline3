@@ -31,6 +31,7 @@ import org.jline.utils.Curses;
 import org.jline.utils.InfoCmp;
 import org.jline.utils.InfoCmp.Capability;
 import org.jline.utils.Log;
+import org.jline.utils.NonBlockingReader;
 
 public abstract class AbstractTerminal implements Terminal {
 
@@ -114,6 +115,7 @@ public abstract class AbstractTerminal implements Terminal {
         }
         return prev;
     }
+    
 
     public String getName() {
         return name;
